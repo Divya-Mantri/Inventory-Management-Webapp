@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Inventory - Maheswari Hardware</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+
+  <!-- Inventory Header -->
+  <section class="container my-5 bg-light">
+    <h2 class="text-center p-4 fw-bold mb-4">🛒Inventory Dashboard🛒</h2>
+    <br>
+
+    <!--For searching the item in the Inventory-->
+    <div class="mb-3">
+      <input type="text" class="form-control" id="searchInput" placeholder="Search for the items...">
+      <button type="button" class="btn btn-primary mt-2" id="searchBtn">Search</button>
+    </div>
+    <br>
+
+    <!-- For Adding New Item in the Inventory-->
+    <div class="card mb-4">
+      <div class="card-header bg-dark text-white">
+        <strong>Add New Item</strong>
+      </div>
+      <div class="card-body">
+        <form id="addItemForm" class="needs-validation" novalidate>
+          <div class="row g-3">
+            <div class="col-md-2">
+              <label class="form-label">Item Name</label>
+              <input type="text" class="form-control" id="itemName" placeholder="e.g. Paint Brush" required
+                minlength="2">
+              <div class="invalid-feedback">Please enter a valid item name (atleast 2 characters long)...</div>
+            </div>
+            <div class="col-md-4">
+              <label class="form-label">Description</label>
+              <input type="text" class="form-control" id="description" placeholder="e.g. 2-inch paint brush" required
+                minlength="5">
+              <div class="invalid-feedback">Please enter a valid description (atleast 5 characters long)...</div>
+            </div>
+            <div class="col-md-2">
+              <label class="form-label">Category</label>
+              <select class="form-select" id="category" required>
+                <option value="" disabled selected>Select Category</option>
+                <option>Hand Tools</option>
+                <option>Power Tools</option>
+                <option>Pipes & Fittings</option>
+                <option>Bearings</option>
+                <option>Fasteners</option>
+                <option>Paint & Brushes</option>
+              </select>
+              <div class="invalid-feedback">Please select a category ...</div>
+            </div>
+            <div class="col-md-2">
+              <label class="form-label">Quantity</label>
+              <input type="number" class="form-control" id="quantity" placeholder="e.g. 50" required min="1">
+              <div class="invalid-feedback">You haven't added quantity...</div>
+            </div>
+            <div class="col-md-2">
+              <label class="form-label">Price (₹)</label>
+              <input type="number" class="form-control" id="price" placeholder="e.g. 150" required min="1">
+              <div class="invalid-feedback">Please enter a valid price...</div>
+            </div>
+          </div>
+          <div class="mt-3 text-end">
+            <button type="submit" class="btn btn-success">Add Item</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Inventory Table -->
+    <div class="table-responsive">
+      <table class="table table-bordered table-hover text-center">
+        <thead class="table-dark">
+          <tr>
+            <th>Item No.</th>
+            <th>Item Name</th>
+            <th>Description</th>
+            <th>Category</th>
+            <th>Quantity</th>
+            <th>Price (₹)</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+
+        <!-- List of Items -->
+        <tbody id="inventory-item">
+          <tr>
+            <td>1</td>
+            <td class="item-name"><strong>Hammers</strong></td>
+            <td>Standard claw hammer,5kg<br><i>(Marco Hammers)</i></td>
+            <td>Hand Tools</td>
+            <td>15</td>
+            <td>800</td>
+            <td><span class="badge bg-success">In Stock</span></td>
+            <td>
+              <button class="btn btn-sm btn-primary">Edit</button>
+              <button class="btn btn-sm btn-danger">Delete</button>
+            </td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td class="item-name"><strong>Hammers</strong></td>
+            <td>Sledge Hammer,200g <br><i>(Venus Hammers)</i></td>
+            <td>Hand Tools</td>
+            <td>50</td>
+            <td>500</td>
+            <td><span class="badge bg-success">In Stock</span></td>
+            <td>
+              <button class="btn btn-sm btn-primary">Edit</button>
+              <button class="btn btn-sm btn-danger">Delete</button>
+            </td>
+          </tr>
+          <tr>
+            <td>3</td>
+            <td class="item-name"><strong>Ball Bearing</strong></td>
+            <td>6203-2RS ball bearing,17*40*12mm <br><i>(ARB Bearings)</i></td>
+            <td>Bearings</td>
+            <td>100</td>
+            <td>250</td>
+            <td><span class="badge bg-success">In Stock</span></td>
+            <td>
+              <button class="btn btn-sm btn-primary">Edit</button>
+              <button class="btn btn-sm btn-danger">Delete</button>
+            </td>
+          </tr>
+          <tr>
+            <td>4</td>
+            <td class="item-name"><strong>Roller Bearings</strong></td>
+            <td>NU205 cylindrical roller bearing <br><i>(TATA Bearings)</i></td>
+            <td>Bearings</td>
+            <td>50</td>
+            <td>500</td>
+            <td><span class="badge bg-success">In Stock</span></td>
+            <td>
+              <button class="btn btn-sm btn-primary">Edit</button>
+              <button class="btn btn-sm btn-danger">Delete</button>
+            </td>
+          </tr>
+          <tr>
+            <td>5</td>
+            <td class="item-name"><strong>Thrust Bearing</strong></td>
+            <td>51105 thrust ball bearing, 25*42*11mm<br><i>(NBC Bearings)</i></td>
+            <td>Bearings</td>
+            <td>30</td>
+            <td>650</td>
+            <td><span class="badge bg-success">In Stock</span></td>
+            <td>
+              <button class="btn btn-sm btn-primary">Edit</button>
+              <button class="btn btn-sm btn-danger">Delete</button>
+            </td>
+          </tr>
+          <tr>
+            <td>6</td>
+            <td class="item-name"><strong>Exterior Paints</strong></td>
+            <td>Yellow exterior paint [waterproof & dustproof], 10kg <br><i>(Nerolyc Paints)</i> </td>
+            <td>Paints & Brushes</td>
+            <td>10</td>
+            <td>1000</td>
+            <td><span class="badge bg-success">In Stock</span></td>
+            <td>
+              <button class="btn btn-sm btn-primary">Edit</button>
+              <button class="btn btn-sm btn-danger">Delete</button>
+            </td>
+          </tr>
+          <tr>
+            <td>7</td>
+            <td class="item-name"><strong>Paint Brush 2"</strong></td>
+            <td>2-inch paint brush, wooden handle</td>
+            <td>Paints & Brushes</td>
+            <td>20</td>
+            <td>10</td>
+            <td><span class="badge bg-success">In Stock</span></td>
+            <td>
+              <button class="btn btn-sm btn-primary">Edit</button>
+              <button class="btn btn-sm btn-danger">Delete</button>
+            </td>
+          </tr>
+          <tr>
+            <td>8</td>
+            <td class="item-name"><strong>Interior Paints</strong></td>
+            <td>Grey interior paint, 10kg <br><i>(Berger Paints)</i></td>
+            <td>Paints & Brushes</td>
+            <td>10</td>
+            <td>2000</td>
+            <td><span class="badge bg-success">In Stock</span></td>
+            <td>
+              <button class="btn btn-sm btn-primary">Edit</button>
+              <button class="btn btn-sm btn-danger">Delete</button>
+            </td>
+          </tr>
+          <tr>
+            <td>9</td>
+            <td class="item-name"><strong>Common Nails</strong></td>
+            <td>2-inch common nails, galvanized</td>
+            <td>Fasteners</td>
+            <td>200</td>
+            <td>150</td>
+            <td><span class="badge bg-success">In Stock</span></td>
+            <td>
+              <button class="btn btn-sm btn-primary">Edit</button>
+              <button class="btn btn-sm btn-danger">Delete</button>
+            </td>
+          </tr>
+          <tr>
+            <td>10</td>
+            <td class="item-name"><strong>PVC Pipes 1"</strong></td>
+            <td>1-inch PVC pipe, 10ft length<br><i>(Supreme Brand)</i></td>
+            <td>Pipes & Fittings</td>
+            <td>100</td>
+            <td>400</td>
+            <td><span class="badge bg-success">In Stock</span></td>
+            <td>
+              <button class="btn btn-sm btn-primary">Edit</button>
+              <button class="btn btn-sm btn-danger">Delete</button>
+            </td>
+          </tr>
+          <tr>
+            <td>11</td>
+            <td class="item-name"><strong> Power Drill</strong></td>
+            <td>18V drill, includes battery <br><i>(Extra Power Brand)</i></td>
+            <td>Power Tools</td>
+            <td>10</td>
+            <td>9500</td>
+            <td><span class="badge bg-success">In Stock</span></td>
+            <td>
+              <button class="btn btn-sm btn-primary">Edit</button>
+              <button class="btn btn-sm btn-danger">Delete</button>
+            </td>
+          </tr>
+          <tr>
+            <td>12</td>
+            <td class="item-name"><strong>Circular Saw</strong></td>
+            <td>7.25-inch circular saw, 15A <br><i>(Extra Power Brand)</i></td>
+            <td>Power Tools</td>
+            <td>50</td>
+            <td>5000</td>
+            <td><span class="badge bg-success">In Stock</span></td>
+            <td>
+              <button class="btn btn-sm btn-primary">Edit</button>
+              <button class="btn btn-sm btn-danger">Delete</button>
+            </td>
+          </tr>
+          <tr>
+            <td>13</td>
+            <td class="item-name"><strong>Finishing Nails</strong></td>
+            <td>1.5-inch finishing nails</td>
+            <td>Fasteners</td>
+            <td>500</td>
+            <td>50</td>
+            <td><span class="badge bg-success">In Stock</span></td>
+            <td>
+              <button class="btn btn-sm btn-primary">Edit</button>
+              <button class="btn btn-sm btn-danger">Delete</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+  <script src="js/inventory.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!--Edit Form-->
+  <div class="modal fade" id="editModal" tabindex="=-1">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header bg-primary text-white">
+         <h5 class="modal-title" id="editModalLable">Edit Item</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+       <div class="modal-body">
+        <form id="editItemForm">
+          <input type="hidden" id="editIndex">
+            <div class="row g-3">
+              <div class="col-md-2">
+                <label class="form-label">Item Name</label>
+                <input type="text" class="form-control" id="editItemName" required>
+              </div>
+              <div class="col-md-4">
+                <label class="form-label">Description</label>
+                <input type="text" class="form-control" id="editDescription" required>
+              </div>
+              <div class="col-md-2">
+                <label class="form-label">Category</label>
+                <select class="form-select" id="editCategory" required>
+                  <option>Hand Tools</option>
+                  <option>Power Tools</option>
+                  <option>Pipes & Fittings</option>
+                  <option>Bearings</option>
+                  <option>Fasteners</option>
+                  <option>Paint & Brushes</option>
+                </select>
+              </div>
+              <div class="col-md-2">
+                <label class="form-label">Quantity</label>
+                <input type="number" class="form-control" id="editQuantity" required>
+              </div>
+              <div class="col-md-2">
+                <label class="form-label">Price (₹)</label>
+                <input type="number" class="form-control" id="editPrice" required>
+              </div>
+            </div>
+            <div class="mt-3 text-end">
+              <button type="submit" class="btn btn-success">Save Changes</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</body>
+
+</html>
