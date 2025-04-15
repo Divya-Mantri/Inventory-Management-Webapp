@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Login - Maheswari Hardware</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container my-5">
+        <h2 class="text-center">Owner Login</h2>
+        <form id="loginForm" class="needs-validation" novalidate>
+            <div class="mb-3">
+                <label class="form-label">Username</label>
+                <input type="text" class="form-control" id="username" required>
+                <div class="invalid-feedback">Please enter the username.</div>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Password</label>
+                <div class="input-group">
+
+                    <input type="password" class="form-control pe-5" id="password" required>
+                    <button type="button" class="btn position-absolute end-0 top-50 translate-middle-y"
+                        id="togglePassword" style="background: none; border: none;">
+                        <i class="bi bi-eye"></i>
+                    </button>
+                </div>
+                <div class="invalid-feedback">Please enter the password.</div>
+            </div>
+            <button type="submit" class="btn btn-primary">Login</button>
+        </form>
+    </div>
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', async function (e) {
+            e.preventDefault();
+            if (!this.checkValidity()) {
+                this.classList.add('was-validated');
+                return;
+            }
+            const data = {
+                username: document.getElementById('username').value.trim(),
+                password: document.getElementById('password').value.trim()
+            };
+            try {
+                console.log('Attempting login:', data.username);
+                const res = await fetch('http://localhost:5000/api/auth/login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+                const result = await res.json();
+                console.log('Login response:', result);
+                if (res.ok) {
+                    localStorage.setItem('token', result.token);
+                    window.location.href = 'inventory.html';
+                } else {
+                    alert(result.message || 'Login failed');
+                }
+            } catch (err) {
+                console.error('Login error:', err);
+                alert('Error: ' + err.message);
+            }
+        });
+
+        // Password visibility toggle
+        document.getElementById('togglePassword').addEventListener('click', function () {
+            const passwordInput = document.getElementById('password');
+            const icon = this.querySelector('i');
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                icon.classList.remove('bi-eye');
+                icon.classList.add('bi-eye-slash');
+            } else {
+                passwordInput.type = 'password';
+                icon.classList.remove('bi-eye-slash');
+                icon.classList.add('bi-eye');
+            }
+        });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

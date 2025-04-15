@@ -10,11 +10,34 @@
 
 <body>
 
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg bg-dark navbar-dark sticky-top">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="index.html">
+        <img src="images/Logo.png" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
+        Maheswari Hardware Store
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="index.html">Home</a>
+          </li>
+          <li class="nav-item">
+            <button class="btn btn-outline-light" onclick="logout()">Logout</button>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
   <!-- Inventory Header -->
   <section class="container my-5 bg-light">
-    <h2 class="text-center p-4 fw-bold mb-4">🛒Inventory Dashboard🛒</h2>
+    <h2 class="text-center p-4 fw-bold mb-4">🛒 Inventory Dashboard 🛒</h2>
     <br>
-
+    
     <!--For searching the item in the Inventory-->
     <div class="mb-3">
       <input type="text" class="form-control" id="searchInput" placeholder="Search for the items...">
@@ -272,12 +295,12 @@
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
         <div class="modal-header bg-primary text-white">
-         <h5 class="modal-title" id="editModalLable">Edit Item</h5>
+          <h5 class="modal-title" id="editModalLable">Edit Item</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
         </div>
-       <div class="modal-body">
-        <form id="editItemForm">
-          <input type="hidden" id="editIndex">
+        <div class="modal-body">
+          <form id="editItemForm">
+            <input type="hidden" id="editIndex">
             <div class="row g-3">
               <div class="col-md-2">
                 <label class="form-label">Item Name</label>
